@@ -1,0 +1,25 @@
+{
+  "name": "freecodecamp_express",
+  "version": "1.0.0",
+  "description": "express tutorial",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dip4012/Node-tutorial-freeCodeCamp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dip4012/Node-tutorial-freeCodeCamp/issues"
+  },
+  "homepage": "https://github.com/dip4012/Node-tutorial-freeCodeCamp#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
