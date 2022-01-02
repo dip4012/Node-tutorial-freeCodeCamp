@@ -45,7 +45,9 @@ const getAllProducts = async (req, res) => {
 		const options = ["price", "rating"]
 		filters = filters.split(",").forEach((item) => {
 			const [field, operator, value] = item.split("-")
-			queryObject[field] = { [operator]: Number(value) }
+			if (options.includes(field)) {
+				queryObject[field] = { [operator]: Number(value) }
+			}
 		})
 	}
 
