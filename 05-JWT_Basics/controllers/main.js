@@ -3,23 +3,33 @@
 //  send back to frontend
 
 //  setup authentication so only the request with JWT can access the dashboard
-
-const { createCustomError } = require("../errors/custom_error")
+const jwt = require("jsonwebtoken")
+const { BadRequestError } = require("../errors/index")
 
 const login = (req, res) => {
 	const { username, password } = req.body
 
 	if (!username || !password) {
-		throw createCustomError("Please provide username and password.", 400)
+		throw new BadRequestError("Please provide username and password.")
 	}
 
-	res.send("Fake login/Register/SignUp Route")
+	//	in production, ID is provided by the DB
+	const id = new Date().getDate()
+
+	//	try to keep payload small, better experience for user
+	//	in production level, set secret as long, complex and unguessable string value!!!!!
+	const token = jwt.sign({ id, username }, process.env.JWT_SECRET, {
+		expiresIn: "30d",
+	})
+
+	res.status(200).json({ msg: "user created", token })
 }
 
 const dashboard = (req, res) => {
 	const luckyNumber = Math.floor(Math.random() * 100)
+
 	res.status(200).json({
-		msg: `Hello John Doe`,
+		msg: `Hello ${req.user.username}`,
 		secret: `Here is your authorised data, your lucky number is ${luckyNumber}`,
 	})
 }
