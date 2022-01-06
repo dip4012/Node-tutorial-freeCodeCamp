@@ -1,0 +1,220 @@
+openapi: 3.0.0
+info:
+ title: Jobs API
+ contact: {}
+ version: "1.0"
+servers:
+ - url: https://jobs-api-0412.herokuapp.com/api/v1
+   variables: {}
+paths:
+ /jobs:
+  get:
+   tags:
+    - Jobs
+   summary: GET ALL JOBS
+   operationId: GETALLJOBS
+   parameters: []
+   responses:
+    "200":
+     description: ""
+     headers: {}
+   deprecated: false
+  post:
+   tags:
+    - Jobs
+   summary: CREATE JOB
+   operationId: CREATEJOB
+   parameters: []
+   requestBody:
+    description: ""
+    content:
+     application/json:
+      schema:
+       $ref: "#/components/schemas/CREATEJOBREQUEST"
+      example:
+       company: random
+       position: Engineering Analyst
+    required: true
+   responses:
+    "200":
+     description: ""
+     headers: {}
+   deprecated: false
+ /jobs/{id}:
+  parameters:
+   - in: path
+     name: id
+     schema:
+      type: string
+     required: true
+     description: Numeric ID of the user to get
+  get:
+   tags:
+    - Jobs
+   summary: GET A JOB
+   operationId: GETAJOB
+   parameters: []
+   responses:
+    "200":
+     description: ""
+     headers: {}
+   deprecated: false
+  delete:
+   tags:
+    - Jobs
+   summary: DELETE JOB
+   operationId: DELETEJOB
+   parameters: []
+   responses:
+    "200":
+     description: ""
+     headers: {}
+   deprecated: false
+  patch:
+   tags:
+    - Jobs
+   summary: UPDATE JOB
+   operationId: UPDATEJOB
+   parameters: []
+   requestBody:
+    description: ""
+    content:
+     application/json:
+      schema:
+       $ref: "#/components/schemas/UPDATEJOBREQUEST"
+      example:
+       company: Byjus
+       position: Technical Analyst
+       status: interview
+    required: true
+   responses:
+    "200":
+     description: ""
+     headers: {}
+   deprecated: false
+ /auth/login:
+  post:
+   tags:
+    - Auth
+   summary: LOGIN USER
+   operationId: LOGINUSER
+   parameters: []
+   requestBody:
+    description: ""
+    content:
+     application/json:
+      schema:
+       $ref: "#/components/schemas/LOGINUSERREQUEST"
+      example:
+       email: anna.hath@gmail.com
+       password: "123456"
+    required: true
+   responses:
+    "200":
+     description: ""
+     headers: {}
+   deprecated: false
+   security: []
+ /auth/register:
+  post:
+   tags:
+    - Auth
+   summary: REGISTER USER
+   operationId: REGISTERUSER
+   parameters: []
+   requestBody:
+    description: ""
+    content:
+     application/json:
+      schema:
+       $ref: "#/components/schemas/REGISTERUSERREQUEST"
+      example:
+       name: Anna Hathway
+       email: anna.hath@gmail.com
+       password: "123456"
+    required: true
+   responses:
+    "200":
+     description: ""
+     headers: {}
+   deprecated: false
+   security: []
+components:
+ schemas:
+  LOGINUSERREQUEST:
+   title: LOGINUSERREQUEST
+   required:
+    - email
+    - password
+   type: object
+   properties:
+    email:
+     type: string
+    password:
+     type: string
+   example:
+    email: anna.hath@gmail.com
+    password: "123456"
+  REGISTERUSERREQUEST:
+   title: REGISTERUSERREQUEST
+   required:
+    - name
+    - email
+    - password
+   type: object
+   properties:
+    name:
+     type: string
+    email:
+     type: string
+    password:
+     type: string
+   example:
+    name: Anna Hathway
+    email: anna.hath@gmail.com
+    password: "123456"
+  CREATEJOBREQUEST:
+   title: CREATEJOBREQUEST
+   required:
+    - company
+    - position
+   type: object
+   properties:
+    company:
+     type: string
+    position:
+     type: string
+   example:
+    company: random
+    position: Engineering Analyst
+  UPDATEJOBREQUEST:
+   title: UPDATEJOBREQUEST
+   required:
+    - company
+    - position
+    - status
+   type: object
+   properties:
+    company:
+     type: string
+    position:
+     type: string
+    status:
+     type: string
+   example:
+    company: Byjus
+    position: Technical Analyst
+    status: interview
+ securitySchemes:
+  httpBearer:
+   type: http
+   scheme: bearer
+security:
+ - httpBearer: []
+tags:
+ - name: Misc
+   description: ""
+ - name: Jobs
+   description: ""
+ - name: Auth
+   description: ""
